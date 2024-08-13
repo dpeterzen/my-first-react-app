@@ -1,14 +1,23 @@
-export default function AddTodo({ onAddTask }) {
+import { useState } from 'react';
+
+export default function AddTodo({ onAddTodo }) {
+  const [text, setText] = useState('');
+
   return (
-    <form onSubmit={null}>
-      <label htmlFor="task-entry">Enter a task: </label>
+    <>
       <input
-        type="text"
-        name="task-entry"
-        value={inputVal}
-        onChange={handleInputChange}
+        placeholder="Add todo"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
       />
-      <button type="submit">Submit</button>
-    </form>
+      <button
+        onClick={() => {
+          setText('');
+          onAddTodo(text);
+        }}
+      >
+        Add
+      </button>
+    </>
   );
 }

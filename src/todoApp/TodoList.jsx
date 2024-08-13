@@ -10,6 +10,7 @@ export default function TodoList({ todos, onEditTodo, onDeleteTodo }) {
           <button onClick={() => onEditTodo(todo)}>Edit</button>
           <button onClick={() => onSaveTodo(todo)}>Save</button>
           <button onClick={() => onDeleteTodo(todo)}>Delete</button>
+          ID: {todo.id} 
         </li>
       ))}
     </ul>
