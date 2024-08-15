@@ -31,13 +31,13 @@ export default function TodoApp({name}) {
   const handleDeleteTodo = (todo) => {
     dispatch({
       type: 'deleted',
-      todo: todo,
+      id: todo.id,
     });
   };
 
-  const handleEditTodo = (todo) => {
+  const handleSaveTodo = (todo) => {
     dispatch({
-      type: 'edited',
+      type: 'saved',
       todo: todo,
     });
   };
@@ -49,7 +49,7 @@ export default function TodoApp({name}) {
       <h4>All the tasks!</h4>
       <TodoList
         todos={todos}
-        onEditTodo={handleEditTodo}
+        onSaveTodo={handleSaveTodo}
         onDeleteTodo={handleDeleteTodo}
       />
     </section>
@@ -66,6 +66,21 @@ function todosReducer(todos, action) {
           text: action.text,
         },
       ];
+    }
+    case 'saved': {
+      return todos.map((t) => {
+        if (t.id === action.todo.id) {
+          return action.todo;
+        } else {
+          return t;
+        }
+      });
+    }
+    case 'deleted': {
+      return todos.filter((t) => (t.id !== action.id));
+    }
+    default: {
+      throw Error('Unknown action: ' + action.type);
     }
   }
 }
