@@ -100,3 +100,4 @@ function ProductCategoryRow({ category }) {
     return <FilterableProductTable products={PRODUCTS} />;
   }
   
+  // save paper trail
